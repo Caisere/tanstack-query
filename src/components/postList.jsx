@@ -54,7 +54,7 @@ const PostList = ({ user }) => {
                 Edit User
             </button>
 
-            {editUser && <EditUser user={user} />}
+            {editUser && <EditUser user={user} onEditComplete={() => setEditUser(edit => !edit)} />}
         </> 
     );
 };

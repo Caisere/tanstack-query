@@ -8,7 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { editUser } from "../api/post";
 
 
-function EditUser({user = {}}) {
+function EditUser({user = {}, onEditComplete}) {
     const queryClient = useQueryClient();
 
     const {id: editId, ...editValues} = user;
@@ -29,7 +29,13 @@ const {mutate, isPending} = useMutation({
         queryClient.invalidateQueries({
             queryKey: ["users"]
         });
-        reset();
+        reset({
+            name: "",
+            email: "",
+            username: "",
+            phone: ""
+        });
+        onEditComplete();
     },
     onError: (error) => {
         toast.error(error.message)
