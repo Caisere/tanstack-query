@@ -1,30 +1,31 @@
 // import { useState } from "react";
 // import { useAddPost } from "../hooks/usePost";
+// import { addPost } from "../api/post";
 import { useForm } from "react-hook-form";
-import { addPost } from "../api/post";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
-import { fetchPosts } from "../api/post";
 import { useQueryClient } from "@tanstack/react-query";
+import { editUser } from "../api/post";
 
 
-function AddPost() {
+function EditUser({user = {}}) {
     const queryClient = useQueryClient();
-//   const [title, setTitle] = useState("");
-//   const [post, setPost] = useState("");
-const {data: users} = useQuery({
-    queryKey: ["users"],
-    queryFn: fetchPosts
-})
-const {register, handleSubmit, reset, formState} = useForm();
+
+    const {id: editId, ...editValues} = user;
+    const isEditSession = Boolean(editId)
+
+// console.log(user)
+
+const {register, handleSubmit, reset, formState} = useForm({
+    defaultValues: isEditSession ? editValues : {}
+});
 const {errors} = formState;
 
 
 const {mutate, isPending} = useMutation({
-    mutationFn: addPost,
+    mutationFn: editUser,
     onSuccess: () => {
-        toast.success("User added successfully");
+        toast.success("Successfully Edited the User Information");
         queryClient.invalidateQueries({
             queryKey: ["users"]
         });
@@ -35,13 +36,9 @@ const {mutate, isPending} = useMutation({
     }
 })
 
-function onSubmit(userInfo) {
-    const userWithId = {
-        id: Number(users[users.length - 1].id) + 1,
-        ...userInfo
-    }
-    mutate(userWithId)
-    console.log(userWithId)
+function onSubmit(editedUserInfo) {
+    mutate({editedUserInfo, editId})
+    console.log({editedUserInfo, editId})
 }
 
 function handleError(errors) {
@@ -125,9 +122,9 @@ function handleError(errors) {
             <button 
                 type="submit"
                 disabled={isPending}
-            >{isPending ? "Adding User" : "Add User"}</button>
+            >{isEditSession && "Save User"}</button>
         </form>
     );
 }
 
-export default AddPost;
+export default EditUser;

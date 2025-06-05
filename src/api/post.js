@@ -28,3 +28,29 @@ export async function deleteUser(id) {
         throw new Error("Failed to delete user")
     }
 }
+
+export async function editUser({editedUserInfo, editId}) {
+    console.log(editId)
+    try {
+        const response = await axios.put(`${BASED_URL}/${editId}`, {
+            name: editedUserInfo.name,
+            email: editedUserInfo.email,
+            username: editedUserInfo.username,
+            phone: editedUserInfo.phone
+        })
+        return {
+            name: response.data.name,
+            email: response.data.email,
+            username: response.data.username,
+            phone: response.data.phone
+        }
+    } catch {
+        throw new Error("Failed to edit user")
+        // return {
+        //     name: user.name,
+        //     email: user.email,
+        //     username: user.username,
+        //     phone: user.phone
+        // }
+    }
+}

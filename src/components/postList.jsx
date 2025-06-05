@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { useMutation } from "@tanstack/react-query";
 import { deleteUser } from "../api/post";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+// import AddPost from "./addpost";
+import EditUser from "./editUser";
 
 const PostList = ({ user }) => {
+    const [editUser, setEditUser] = useState(false)
     const {name, email, phone, username, id} = user
     const queryClient = useQueryClient();
 
@@ -36,11 +39,22 @@ const PostList = ({ user }) => {
                 <p>{username}</p>
                 <p>{id}</p>
             </li>
+
+            
+
             <button onClick={() => handleDelete(id)}
                 disabled={isPending}
             >
                 {isPending ? "Deleting..." : "Delete"}
             </button>
+            <button onClick={(e) => {
+                e.preventDefault()
+                setEditUser(user => !user)
+            }}>
+                Edit User
+            </button>
+
+            {editUser && <EditUser user={user} />}
         </> 
     );
 };

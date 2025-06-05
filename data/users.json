@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "John Doe",
+      "name": "John",
       "email": "john.doe@example.com",
       "username": "johndoe",
-      "phone": "+1-555-123-4567"
+      "phone": "+1-555-123-4567",
+      "id": "1"
     },
     {
       "id": "2",
@@ -139,13 +139,6 @@
       "email": "mia.allen@example.com",
       "username": "miaallen",
       "phone": "+1-555-656-7878"
-    },
-    {
-      "id": 1749130079245,
-      "name": "Omoshola",
-      "email": "omoshola.code@gmail.com",
-      "username": "Omoshola E",
-      "phone": "+1-983-266-0987"
     }
   ]
 }
