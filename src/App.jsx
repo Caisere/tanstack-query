@@ -11,8 +11,8 @@ import { fetchPosts } from "./api/post";
 
 function App() {
   const [showAddPost, setShowAddPost] = useState(false);
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["posts"],
+  const { data: users, isLoading, isError, error } = useQuery({
+    queryKey: ["users"],
     queryFn: fetchPosts,
   });
 
@@ -30,8 +30,8 @@ function App() {
       </button>
       {showAddPost && <AddPost />}
       <ul>
-        {data.map((post) => (
-          <PostList post={post} key={post.id} />
+        {users.map((user) => (
+          <PostList user={user} key={user.id} />
         ))}
       </ul>
     </>
