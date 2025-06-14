@@ -43,29 +43,13 @@ const {mutate, isPending} = useMutation({
 })
 
 function onSubmit(editedUserInfo) {
-    mutate({editedUserInfo, editId})
-    console.log({editedUserInfo, editId})
+    mutate({editedUserInfo, editId}) // ✅
+    // console.log({editedUserInfo, editId})
 }
 
 function handleError(errors) {
     console.log(errors)
 }
-//   const { mutate } = useAddPost();
-
-
-
-//   function handleSubmitPost(e) {
-//     e.preventDefault();
-//     let newPost = {
-//       title,
-//       body: post,
-//       id: new Date(),
-//     };
-//     console.log({ title, body: post, id: newPost.id });
-//     mutate(newPost);
-//     setPost("");
-//     setTitle("");
-//   }
 
     return (
         <form onSubmit={handleSubmit(onSubmit, handleError)}>
@@ -134,3 +118,22 @@ function handleError(errors) {
 }
 
 export default EditUser;
+
+
+
+//   const { mutate } = useAddPost();
+
+
+
+//   function handleSubmitPost(e) {
+//     e.preventDefault();
+//     let newPost = {
+//       title,
+//       body: post,
+//       id: new Date(),
+//     };
+//     console.log({ title, body: post, id: newPost.id });
+//     mutate(newPost);
+//     setPost("");
+//     setTitle("");
+//   }

@@ -8,7 +8,14 @@ export async function fetchPosts() {
   const response = await axios.get(
     BASED_URL,
   );
-  console.log(response.data);
+//   console.log(response.data);
+  return response.data;
+}
+
+export async function fetchPostsById(id) {
+  const response = await axios.get(`${BASED_URL}/${id}`);
+    console.log('API call completed for each User')
+    console.log(response.data);
   return response.data;
 }
 

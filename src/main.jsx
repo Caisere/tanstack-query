@@ -5,7 +5,8 @@ import App from './App.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
-
+import User from './pages/user'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -19,8 +20,6 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
-            <App />
-            <ReactQueryDevtools initialIsOpen={false} />
             <Toaster 
                 position="top-center" //position of the toast
                 gutter={12} //space between the toast
@@ -45,6 +44,14 @@ createRoot(document.getElementById('root')).render(
                     }
                 }}
             />
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<App />} >
+                        <Route path='user/:id' element={<User />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     </StrictMode>,
 )
