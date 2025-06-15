@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostList from "./components/postList";
 import AddPost from "./components/addpost";
 import { fetchPosts } from "./api/post";
-import { Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 // async function fetchPosts() {
 //     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
@@ -39,6 +39,11 @@ function App() {
       <button onClick={handleAddPost}>
         {showAddPost ? "Hide Add Post" : "Show Add Post"}
       </button>
+      <Link to='/loadmore'>
+        <button>
+            Infinity Loading with Tanstack Query
+        </button>
+      </Link>
       {showAddPost && <AddPost />}
 
       <div style={{ display: "flex", gap: "20px" }}>

@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import User from './pages/user'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LoadMore from './pages/loadmore.jsx'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -49,6 +50,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/' element={<App />} >
                         <Route path='user/:id' element={<User />} />
                     </Route>
+                    <Route path='loadmore' element={<LoadMore />} />
                 </Routes>
             </BrowserRouter>
             <ReactQueryDevtools initialIsOpen={false} />
